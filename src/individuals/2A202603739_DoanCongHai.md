@@ -14,6 +14,7 @@
 
 ## 2. Kết quả chính
 
+<<<<<<< HEAD
 | Model | F1 (Test) | F1 (SUB 40) | p95 Latency (ms/tin) | Cost (USD / 1k tin) |
 | --- | --- | --- | --- | --- |
 | **1. BoW + LogReg (tự code)** | 0.887 | 0.889 | 0.05 ms | $0.0000 |
@@ -26,6 +27,22 @@
 | **4c. LLM nhỏ few-shot** | N/A* | 0.947 | 510.30 ms | $0.0008 |
 
 *\* Ghi chú: Các mô hình LLM (Phần 4) được đánh giá trên tập SUB (40 tin cân bằng) để tối ưu chi phí API.*
+=======
+**Lưu ý về số liệu:** File Python là mã nguồn notebook, không chứa output thực thi đầy đủ của bảng `RESULTS`. Vì vậy không thể xác nhận chính xác toàn bộ F1, p95 và chi phí của từng model chỉ từ file `.py`. Các số liệu dưới đây được cập nhật theo những kết quả được ghi trực tiếp trong phần giải thích của file Python; các ô chưa có output được đánh dấu cần chạy notebook để lấy số chính xác.
+
+| Model | F1 (Test) | F1 (SUB 40) | p95 Latency (ms/tin) | Cost (USD / 1k tin) |
+| --- | ---: | ---: | ---: | ---: |
+| **1. BoW + LogReg (tự code)** | 0.919 | Cần lấy từ output | < 1 ms (khoảng 0.35 ms theo phần phản ánh) | Cần lấy từ output |
+| **2. BoW + MLP (Deep Learning)** | 0.947 | Cần lấy từ output | < 1 ms (khoảng 0.35 ms theo phần phản ánh) | Cần lấy từ output |
+| **3a. Encoder (MiniLM) + kNN** | Cần lấy từ output | Cần lấy từ output | Cần lấy từ output | $0.0000 |
+| **3b. Encoder (MiniLM) + LogReg** | Cần lấy từ output | Cần lấy từ output | Cần lấy từ output | $0.0000 |
+| **3c. Encoder (MiniLM) + MLP head** | Cần lấy từ output | Cần lấy từ output | Khoảng 50 ms theo phần phân tích Pareto | $0.0000 |
+| **4a. LLM nhỏ zero-shot (`gpt-6-luna`)** | N/A* | Cần lấy từ output | p95 > 2,400 ms | Cần lấy từ output |
+| **4b. LLM lớn zero-shot (`gpt-6.1-terra`)** | N/A* | Cần lấy từ output | p95 > 2,400 ms (nhóm LLM API) | Cần lấy từ output |
+| **4c. LLM nhỏ few-shot** | N/A* | Cần lấy từ output | p95 > 2,400 ms (nhóm LLM API) | Cần lấy từ output |
+
+*Ghi chú: Các mô hình LLM (Phần 4) được đánh giá trên tập SUB (40 tin cân bằng). File Python ghi rõ p95 của LLM API vượt 2,400 ms; muốn có số chính xác từng model và chi phí, cần chạy notebook và lấy bảng `RESULTS` thực tế.*
+>>>>>>> 888a423 (Update project files)
 
 ## 3. Dự đoán và thực tế
 
@@ -67,7 +84,11 @@
 
 - **Giải thích & Quyết định cho Ngân hàng:**
   - **Lựa chọn:** Ngân hàng nên chọn **ngưỡng 0.8**.
+<<<<<<< HEAD
   - **Lý do:** Với tin nhắn OTP ngân hàng, hậu quả của việc **chặn nhầm (False Positive - FP)** là cực kỳ nghiêm trọng (giao dịch tài chính của khách hàng bị đứt gãy, gây khiếu nại và tổn hại uy tín). Ngưỡng 0.8 yêu cầu mô hình phải đạt độ tin cậy $\ge 80\%$ mới phân loại là Spam, đẩy Precision lên mức gần như tuyệt đối (**99.60%**). Dù phải chấp nhận Recall giảm (sót một số tin spam thông thường), ngân hàng đảm bảo tối đa không bao giờ chặn nhầm tin nhắn OTP hợp lệ.
+=======
+  - **Lý do:** Với tin nhắn OTP ngân hàng, hậu quả của việc **chặn nhầm (False Positive - FP)** là cực kỳ nghiêm trọng (giao dịch tài chính của khách hàng bị đứt gãy, gây khiếu nại và tổn hại uy tín). Ngưỡng 0.8 yêu cầu mô hình phải đạt độ tin cậy $\ge 80\%$ mới phân loại là Spam, đẩy Precision đạt **100%** (0 False Positive theo phần giải thích trong file Python). Dù phải chấp nhận Recall giảm (sót một số tin spam thông thường), ngân hàng đảm bảo tối đa không bao giờ chặn nhầm tin nhắn OTP hợp lệ.
+>>>>>>> 888a423 (Update project files)
 
 ## 6. Phương án cho sản phẩm thật
 
